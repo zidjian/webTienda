@@ -1,59 +1,47 @@
-# WebNanotech
+![Logo del proyecto](ubicación)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.5.
+<hr />
 
-## Development server
+![Badge en Desarrollo](https://img.shields.io/badge/Estado-En%20desarrollo-green)
+![GitHub estrellas](https://img.shields.io/github/stars/zidjian?style=social)
 
-To start a local development server, run:
+### Índice
 
-```bash
-ng serve
-```
+- [Descripción del proyecto](#Descripción-del-proyecto)
+- [Desplegar el proyecto](#Desplegar-el-proyecto)
+- [Funcionalidades del proyecto](#Funcionalidades-del-proyecto)
+- [Acceso al proyecto](#Acceso-al-proyecto)
+- [Tecnologías utilizadas](#Tecnologías-utilizadas)
+- [Autores](#Autores)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Descripción del proyecto
 
-## Code scaffolding
+Ecommerce de productos electronicos.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+![Mockup del proyecto](ubicación)
 
-```bash
-ng generate component component-name
-```
+## Desplegar el proyecto
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+1. Clonar el repositorio
+2. Instalar las dependencias `npm install`
+3. Clonar el archivo .env.template a .env y configurar las variables de entorno
+4. Ejecutar el proyecto con `npm run start`
 
-```bash
-ng generate --help
-```
+## Funcionalidades del proyecto
 
-## Building
+-
 
-To build the project run:
+## Acceso al proyecto
 
-```bash
-ng build
-```
+[Demo](enlace)
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Tecnologías utilizadas
 
-## Running unit tests
+- Angular
+- Tailwind
+- PrimeNG
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Autores
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+| [<img src='https://www.github.com/zidjian.png' width=115><br><sub>Waldir Maidana </sub>](https://github.com/zidjian) |
+| :------------------------------------------------------------------------------------------------------------------: |
