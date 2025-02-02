@@ -1,0 +1,79 @@
+<div
+    class="max-w-7xl mx-auto flex justify-center items-center h-[calc(100vh-96px-220px)]">
+    <div class="w-full max-w-md p-6 shadow-md rounded-md">
+        <h1 class="text-center text-2xl font-bold mb-6">Iniciar Sesión</h1>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
+            <div class="flex flex-col">
+                <label for="username" class="mb-1 font-medium"
+                    >Correo Electrónico:</label
+                >
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    pInputText
+                    formControlName="username"
+                    class="p-2 border border-gray-300 rounded-md" />
+                <div
+                    *ngIf="
+                        loginForm.get('username')?.invalid &&
+                        loginForm.get('username')?.touched
+                    "
+                    class="text-red-600 text-sm mt-1">
+                    <small
+                        *ngIf="loginForm.get('username')?.errors?.['required']"
+                        >El usuario es requerido.</small
+                    >
+                    <small
+                        *ngIf="loginForm.get('username')?.errors?.['minlength']"
+                        >El usuario debe tener al menos 3 caracteres.</small
+                    >
+                    <small *ngIf="loginForm.get('username')?.errors?.['email']"
+                        >El correo electrónico no es válido.</small
+                    >
+                </div>
+            </div>
+            <div class="flex flex-col">
+                <label for="password" class="mb-1 font-medium"
+                    >Contraseña:</label
+                >
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    pPassword
+                    formControlName="password"
+                    class="p-2 border border-gray-300 rounded-md" />
+                <div
+                    *ngIf="
+                        loginForm.get('password')?.invalid &&
+                        loginForm.get('password')?.touched
+                    "
+                    class="text-red-600 text-sm mt-1">
+                    <small
+                        *ngIf="loginForm.get('password')?.errors?.['required']"
+                        >La contraseña es requerida.</small
+                    >
+                    <small
+                        *ngIf="loginForm.get('password')?.errors?.['minlength']"
+                        >La contraseña debe tener al menos 6 caracteres.</small
+                    >
+                </div>
+            </div>
+            <button
+                type="submit"
+                pButton
+                label="Iniciar Sesión"
+                class="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200"
+                [disabled]="loginForm.invalid"></button>
+        </form>
+        <p class="text-center mt-4">
+            ¿Aún no tienes cuenta?
+            <a
+                routerLink="/registro"
+                class="text-blue-600 hover:underline cursor-pointer"
+                >Regístrate</a
+            >
+        </p>
+    </div>
+</div>

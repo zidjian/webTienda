@@ -1,0 +1,40 @@
+<div class="max-w-7xl mx-auto">
+    <p-carousel
+        [value]="products"
+        [numVisible]="1"
+        [circular]="true"
+        [autoplayInterval]="3000"
+        [showNavigators]="false">
+        <ng-template pTemplate="item" let-product>
+            <div class="items-center grid grid-cols-1 md:grid-cols-2 gap-8">
+                <img
+                    [src]="product.image"
+                    class="w-full object-cover rounded-lg shadow-md mb-4 aspect-square" />
+                <div class="">
+                    <h3
+                        (click)="redirectToProduct(product.id)"
+                        class="text-lg dark:text-white md:text-2xl font-bold cursor-pointer hover:underline mb-2">
+                        {{ product.title }}
+                    </h3>
+                    <p>{{ product.description }}</p>
+                    <p class="text-xl font-bold text-green-600 mb-4">
+                        {{ product.price | currencySoles }}
+                    </p>
+                    <div class="w-full flex justify-between mt-4">
+                        <button
+                            pButton
+                            type="button"
+                            label="Ver más"
+                            class="p-button-rounded p-button-info"
+                            [routerLink]="['/producto', product.id]"></button>
+                        <button
+                            pButton
+                            type="button"
+                            icon="pi pi-shopping-cart"
+                            class="p-button-rounded p-button-success"></button>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-carousel>
+</div>

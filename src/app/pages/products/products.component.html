@@ -1,0 +1,11 @@
+<div class="products">
+    <app-product-card
+        *ngFor="let product of products"
+        [product]="{
+            id: product.id.toString(),
+            image: product.image,
+            name: product.name,
+            price: product.price,
+            rating: product.rating,
+        }"></app-product-card>
+</div>
