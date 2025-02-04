@@ -15,7 +15,7 @@
             <span>Carrito</span>
         </div>
         <ng-container *ngIf="isUserLoggedIn; else loginButton">
-            <div class="relative">
+            <div class="relative" (document:click)="isDropdownOpen = false">
                 <button
                     class="flex items-center focus:outline-none"
                     (click)="toggleDropdown($event)">

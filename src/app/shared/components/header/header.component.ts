@@ -42,17 +42,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  toggleDropdown(event: Event) {
-    if (event.eventPhase !== Event.AT_TARGET) {
-      return;
-    }
+  toggleDropdown(event: MouseEvent) {
+    event.stopPropagation();
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
-  logout(event: Event) {
-    if (event.eventPhase !== Event.AT_TARGET) {
-      return;
-    }
+  logout(event: MouseEvent) {
+    event.stopPropagation();
     this.authService.logout();
     this.isDropdownOpen = false; // Close the dropdown on logout
   }
