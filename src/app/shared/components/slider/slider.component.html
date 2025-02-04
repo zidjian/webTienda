@@ -1,4 +1,4 @@
-<div class="max-w-7xl mx-auto">
+<div class="max-w-7xl mx-auto my-8 px-4 sm:px-6 lg:px-8">
     <p-carousel
         [value]="products"
         [numVisible]="1"
@@ -6,7 +6,8 @@
         [autoplayInterval]="3000"
         [showNavigators]="false">
         <ng-template pTemplate="item" let-product>
-            <div class="items-center grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div
+                class="items-center grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                 <img
                     [src]="product.image"
                     class="w-full object-cover rounded-lg shadow-md mb-4 aspect-square" />
@@ -16,16 +17,18 @@
                         class="text-lg dark:text-white md:text-2xl font-bold cursor-pointer hover:underline mb-2">
                         {{ product.title }}
                     </h3>
-                    <p>{{ product.description }}</p>
-                    <p class="text-xl font-bold text-green-600 mb-4">
+                    <p class="text-sm md:text-base">
+                        {{ product.description }}
+                    </p>
+                    <p class="text-lg md:text-xl font-bold text-green-600 mb-4">
                         {{ product.price | currencySoles }}
                     </p>
-                    <div class="w-full flex justify-between mt-4">
+                    <div class="w-full flex flex-row justify-between mt-4">
                         <button
                             pButton
                             type="button"
                             label="Ver más"
-                            class="p-button-rounded p-button-info"
+                            class="p-button-rounded p-button-info mb-2 md:mb-0"
                             [routerLink]="['/producto', product.id]"></button>
                         <button
                             pButton
