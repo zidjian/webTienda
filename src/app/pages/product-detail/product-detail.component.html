@@ -1,6 +1,63 @@
-<div class="max-w-7xl mx-auto my-16">
-    <img [src]="product.image" alt="{{ product.name }}" class="product-image" />
-    <h1>{{ product.name }}</h1>
-    <p>{{ product.price | currency }}</p>
-    <p>{{ product.rating }} ★</p>
+<div class="max-w-7xl mx-auto my-16 p-4">
+    <div class="grid grid-cols-8 gap-8">
+        <img
+            [src]="product.imagen ? product.imagen : 'default-image.jpg'"
+            alt="{{ product.nombre }}"
+            class="product-image col-span-3 rounded-lg shadow-md" />
+        <div class="col-span-3 space-y-4">
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                {{ product.nombre }}
+            </h1>
+            <p class="text-yellow-500">{{ product.rating }} ★</p>
+            <p class="text-gray-700 dark:text-gray-300">
+                Stock: {{ product.stock }}
+            </p>
+            <p class="text-gray-600 dark:text-gray-400">
+                {{ product.descripcion }}
+            </p>
+            <p class="text-gray-600 dark:text-gray-400">
+                Características: {{ product.caracteristicas }}
+            </p>
+        </div>
+        <div class="col-span-2 flex flex-col gap-4">
+            <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100">
+                Precio
+            </h2>
+            <p class="text-3xl text-green-600">
+                {{ totalPrice | currencySoles }}
+            </p>
+            <div
+                class="quantity-control w-full flex gap-4 justify-center items-center">
+                <button
+                    pButton
+                    type="button"
+                    icon="pi pi-minus"
+                    (click)="decreaseQuantity()"
+                    [disabled]="quantity <= 1"
+                    class="p-2 bg-gray-200 dark:bg-gray-700 rounded-full"></button>
+                <span class="text-xl text-gray-900 dark:text-gray-100">{{
+                    quantity
+                }}</span>
+                <button
+                    pButton
+                    type="button"
+                    icon="pi pi-plus"
+                    (click)="increaseQuantity()"
+                    [disabled]="quantity >= product.stock"
+                    class="p-2 bg-gray-200 dark:bg-gray-700 rounded-full"></button>
+            </div>
+            <button
+                pButton
+                type="button"
+                label="Agregar a la cesta"
+                (click)="addToCart()"
+                class="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"></button>
+            <button
+                pButton
+                type="button"
+                label="Comprar"
+                (click)="buyNow()"
+                class="w-full py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"></button>
+        </div>
+    </div>
 </div>
