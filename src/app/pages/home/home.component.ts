@@ -4,12 +4,8 @@ import { ProductListComponent } from '../../shared/components/product-list/produ
 import { SliderComponent } from '../../shared/components/slider/slider.component';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  imports: [
-    ProductListComponent,
-    SliderComponent
-  ]
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    imports: [ProductListComponent, SliderComponent],
 })
-export class HomeComponent {
-}
+export class HomeComponent {}

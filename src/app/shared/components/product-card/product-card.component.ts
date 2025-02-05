@@ -6,16 +6,22 @@ import { RouterModule } from '@angular/router';
 import { CurrencySolesPipe } from '../../pipes/currency-soles.pipe';
 
 @Component({
-  selector: 'app-product-card',
-  templateUrl: './product-card.component.html',
-  imports: [CommonModule, CardModule, ButtonModule, RouterModule, CurrencySolesPipe],
+    selector: 'app-product-card',
+    templateUrl: './product-card.component.html',
+    imports: [
+        CommonModule,
+        CardModule,
+        ButtonModule,
+        RouterModule,
+        CurrencySolesPipe,
+    ],
 })
 export class ProductCardComponent {
-  @Input() product!: {
-    id: string;
-    image: string;
-    name: string;
-    price: number;
-    rating: number;
-  };
+    @Input() product!: {
+        id: string;
+        image: string;
+        name: string;
+        price: number;
+        rating: number;
+    };
 }

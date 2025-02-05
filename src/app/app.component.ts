@@ -4,13 +4,8 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 
 @Component({
-  selector: 'app-root',
-  imports: [
-    RouterOutlet,
-    HeaderComponent,
-    FooterComponent
-  ],
-  templateUrl: './app.component.html',
+    selector: 'app-root',
+    imports: [RouterOutlet, HeaderComponent, FooterComponent],
+    templateUrl: './app.component.html',
 })
-export class AppComponent {
-}
+export class AppComponent {}

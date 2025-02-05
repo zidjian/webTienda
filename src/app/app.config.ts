@@ -5,23 +5,23 @@ import Aura from '@primeng/themes/aura';
 
 import { routes } from './app.routes';
 import {
-  provideClientHydration,
-  withEventReplay,
+    provideClientHydration,
+    withEventReplay,
 } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
-    provideClientHydration(withEventReplay()),
-    providePrimeNG({
-      theme: {
-        preset: Aura
-      }
-    }),
-    provideHttpClient(),
-    MessageService
-  ],
+    providers: [
+        provideZoneChangeDetection({ eventCoalescing: true }),
+        provideRouter(routes),
+        provideClientHydration(withEventReplay()),
+        providePrimeNG({
+            theme: {
+                preset: Aura,
+            },
+        }),
+        provideHttpClient(),
+        MessageService,
+    ],
 };

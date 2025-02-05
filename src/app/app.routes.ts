@@ -7,10 +7,14 @@ import { ProductDetailComponent } from './pages/product-detail/product-detail.co
 import { AuthGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'registro', component: RegisterComponent },
-  { path: 'iniciar-sesion', component: LoginComponent },
-  { path: 'productos', component: ProductsComponent },
-  { path: 'producto/:id', component: ProductDetailComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: '' },
+    { path: '', component: HomeComponent },
+    { path: 'registro', component: RegisterComponent },
+    { path: 'iniciar-sesion', component: LoginComponent },
+    { path: 'productos', component: ProductsComponent },
+    {
+        path: 'producto/:id',
+        component: ProductDetailComponent,
+        canActivate: [AuthGuard],
+    },
+    { path: '**', redirectTo: '' },
 ];
