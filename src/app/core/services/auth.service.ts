@@ -38,15 +38,7 @@ export class AuthService {
                     this.authStatus.next(true);
                 }),
                 catchError(error => {
-                    console.error(error.ok);
-                    if (error.ok === false) {
-                        this.messageService.add({
-                            severity: 'error',
-                            summary: 'Error',
-                            detail: 'usuario y/o contraseña incorrectos',
-                        });
-                    }
-                    return this.handleError<any>('login')(error);
+                    return of({ error: 'Usuario y/o contraseña incorrectos' });
                 })
             );
     }

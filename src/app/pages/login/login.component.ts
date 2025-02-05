@@ -17,6 +17,7 @@ import { AuthService } from '../../core/services/auth.service';
 })
 export class LoginComponent {
     loginForm!: FormGroup;
+    errorMessage: string | null = null;
 
     constructor(
         private fb: FormBuilder,
@@ -43,10 +44,16 @@ export class LoginComponent {
     onSubmit() {
         if (this.loginForm.valid) {
             const { correo, contrasena } = this.loginForm.value;
-            this.authService.login(correo, contrasena).subscribe(
-                success => this.router.navigate(['/']),
-                error => alert('Login failed')
-            );
+            this.authService.login(correo, contrasena).subscribe({
+                next: response => {
+                    if (response.error) {
+                        this.errorMessage = response.error;
+                    } else {
+                        this.errorMessage = null;
+                        this.router.navigate(['/']);
+                    }
+                }
+            });
         }
     }
 }

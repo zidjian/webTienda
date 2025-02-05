@@ -70,6 +70,9 @@
                 class="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200"
                 [disabled]="loginForm.invalid"></button>
         </form>
+        <div *ngIf="errorMessage" class="text-red-600 text-center mt-4">
+            {{ errorMessage }}
+        </div>
         <p class="text-center mt-4">
             ¿Aún no tienes cuenta?
             <a
