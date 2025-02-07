@@ -6,7 +6,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { AuthService } from '../../../core/services/auth.service';
 import { DropdownModule } from 'primeng/dropdown';
 import { Subscription } from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
+import { CartService } from '../../../core/services/cart.service';
 
 @Component({
     selector: 'app-header',
@@ -22,13 +22,15 @@ import { CookieService } from 'ngx-cookie-service';
 export class HeaderComponent implements OnInit, OnDestroy {
     isUserLoggedIn = false;
     userName = '';
-    isDropdownOpen = false; // Add this line
+    isDropdownOpen = false;
+    cartItemCount: number = 0;
     private authSubscription!: Subscription;
+    private cartSubscription!: Subscription;
 
     constructor(
         private authService: AuthService,
-        private cookieService: CookieService
-    ) {}
+        private cartService: CartService,
+    ) { }
 
     ngOnInit() {
         this.authSubscription = this.authService.authStatus$.subscribe(
@@ -42,6 +44,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
             this.isUserLoggedIn = true;
             this.userName = user.nombres;
         }
+
+        this.cartSubscription = this.cartService.getCartItems().subscribe(items => {
+            this.cartItemCount = items.reduce((count, item) => count + item.quantity, 0);
+        });
     }
 
     updateUserState(status: boolean) {
@@ -67,6 +73,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         if (this.authSubscription) {
             this.authSubscription.unsubscribe();
+        }
+        if (this.cartSubscription) {
+            this.cartSubscription.unsubscribe();
         }
     }
 }

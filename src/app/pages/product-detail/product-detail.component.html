@@ -1,22 +1,22 @@
 <div class="max-w-7xl mx-auto my-16 p-4">
     <div class="grid grid-cols-8 gap-8">
         <img
-            [src]="product.imagen ? product.imagen : 'default-image.jpg'"
-            alt="{{ product.nombre }}"
+            [src]="product?.imagen || '/producto.webp'"
+            alt="{{ product?.nombre || '' }}"
             class="product-image col-span-3 rounded-lg shadow-md" />
         <div class="col-span-3 space-y-4">
             <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100">
-                {{ product.nombre }}
+                {{ product?.nombre || '' }}
             </h1>
-            <p class="text-yellow-500">{{ product.rating }} ★</p>
+            <p class="text-yellow-500">{{ product?.rating || 0 }} ★</p>
             <p class="text-gray-700 dark:text-gray-300">
-                Stock: {{ product.stock }}
+                Stock: {{ product?.stock || 0 }}
             </p>
             <p class="text-gray-600 dark:text-gray-400">
-                {{ product.descripcion }}
+                {{ product?.descripcion || '' }}
             </p>
             <p class="text-gray-600 dark:text-gray-400">
-                Características: {{ product.caracteristicas }}
+                Características: {{ product?.caracteristicas || '' }}
             </p>
         </div>
         <div class="col-span-2 flex flex-col gap-4">
@@ -43,7 +43,7 @@
                     type="button"
                     icon="pi pi-plus"
                     (click)="increaseQuantity()"
-                    [disabled]="quantity >= product.stock"
+                    [disabled]="quantity >= (product?.stock || 0)"
                     class="p-2 bg-gray-200 dark:bg-gray-700 rounded-full"></button>
             </div>
             <button

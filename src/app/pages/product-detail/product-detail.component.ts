@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../../environment';
 import { CurrencySolesPipe } from '../../shared/pipes/currency-soles.pipe';
 import { ButtonModule } from 'primeng/button';
+import { CartService } from '../../core/services/cart.service';
+import { Product } from '../../core/models/product.model';
 
 @Component({
     selector: 'app-product-detail',
@@ -11,32 +13,34 @@ import { ButtonModule } from 'primeng/button';
     imports: [CurrencySolesPipe, ButtonModule]
 })
 export class ProductDetailComponent implements OnInit {
-    product: any = {};
+    product: Product | undefined;
     quantity: number = 1;
     totalPrice: number = 0;
 
-    constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) { }
+    constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private cartService: CartService) { }
 
     ngOnInit(): void {
         this.getProductDetails();
     }
 
     getProductDetails(): void {
-        const productId = Number(this.route.snapshot.paramMap.get('id'));
-        this.http.get(`${environment.API_URL}productos/${productId}`).subscribe(
-            (data: any) => {
-                this.product = data;
-                this.updateTotalPrice();
-            },
-            (error) => {
-                console.error('Error fetching product details:', error);
-                this.router.navigate(['/']);
-            }
-        );
+        const productId = this.route.snapshot.paramMap.get('id');
+        if (productId) {
+            this.http.get<Product>(`${environment.API_URL}productos/${productId}`).subscribe(
+                (data: Product) => {
+                    this.product = data;
+                    this.updateTotalPrice();
+                },
+                (error) => {
+                    console.error('Error fetching product details:', error);
+                    this.router.navigate(['/']);
+                }
+            );
+        }
     }
 
     increaseQuantity(): void {
-        if (this.quantity < this.product.stock) {
+        if (this.product && this.quantity < this.product.stock) {
             this.quantity++;
             this.updateTotalPrice();
         }
@@ -56,12 +60,14 @@ export class ProductDetailComponent implements OnInit {
     }
 
     addToCart(): void {
-        // Lógica para agregar a la cesta
-        console.log(`Añadido ${this.quantity} de ${this.product.nombre} a la cesta`);
+        if (this.product) {
+            this.cartService.addProductToCart(this.product, this.quantity);
+            this.updateTotalPrice(); // Ensure total price is updated
+        }
     }
 
     buyNow(): void {
         // Lógica para comprar ahora
-        console.log(`Comprando ${this.quantity} de ${this.product.nombre}`);
+        console.log(`Comprando ${this.quantity} de ${this.product?.nombre}`);
     }
 }
