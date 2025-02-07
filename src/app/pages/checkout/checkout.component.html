@@ -1,0 +1,238 @@
+<div class="max-w-7xl mx-auto my-12">
+    <h2 class="font-black text-4xl pb-8 text-center w-full">
+        Finalizar compra
+    </h2>
+    <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div
+                class="grid col-span-1 md:grid-cols-subgrid gap-6 p-4 shadow-md rounded">
+                <!-- Content for the first box -->
+                <div class="">
+                    <h3 class="font-semibold text-lg mb-2">
+                        Dirección de envio
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label
+                                for="address"
+                                class="block text-sm font-medium"
+                                >Dirección:</label
+                            >
+                            <input
+                                type="text"
+                                id="address"
+                                formControlName="address"
+                                class="w-full p-2 border rounded" />
+                            <div
+                                *ngIf="
+                                    checkoutForm.get('address')?.invalid &&
+                                    (checkoutForm.get('address')?.touched ||
+                                        checkoutForm.get('address')?.touched)
+                                "
+                                class="text-red-500 text-sm">
+                                Dirección es requerida.
+                            </div>
+                        </div>
+                        <div>
+                            <label for="city" class="block text-sm font-medium"
+                                >Ciudad:</label
+                            >
+                            <input
+                                type="text"
+                                id="city"
+                                formControlName="city"
+                                class="w-full p-2 border rounded" />
+                            <div
+                                *ngIf="
+                                    checkoutForm.get('city')?.invalid &&
+                                    checkoutForm.get('city')?.touched
+                                "
+                                class="text-red-500 text-sm">
+                                Ciudad es requerida.
+                            </div>
+                        </div>
+                        <div>
+                            <label
+                                for="postal-code"
+                                class="block text-sm font-medium"
+                                >Código Postal:</label
+                            >
+                            <input
+                                type="text"
+                                id="postal-code"
+                                formControlName="postalCode"
+                                class="w-full p-2 border rounded" />
+                            <div
+                                *ngIf="
+                                    checkoutForm.get('postalCode')?.invalid &&
+                                    checkoutForm.get('postalCode')?.touched
+                                "
+                                class="text-red-500 text-sm">
+                                Código Postal es requerido.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <h3 class="font-semibold text-lg mb-2">
+                        Seleccionar metodo de pago
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label
+                                for="payment-method"
+                                class="block text-sm font-medium"
+                                >Método de Pago:</label
+                            >
+                            <select
+                                id="payment-method"
+                                formControlName="paymentMethod"
+                                class="w-full p-2 border rounded">
+                                <option value="credit-card">
+                                    Tarjeta de Crédito
+                                </option>
+                                <option value="paypal">PayPal</option>
+                                <option value="bank-transfer">
+                                    Transferencia Bancaria
+                                </option>
+                            </select>
+                            <div
+                                *ngIf="
+                                    checkoutForm.get('paymentMethod')
+                                        ?.invalid &&
+                                    checkoutForm.get('paymentMethod')?.touched
+                                "
+                                class="text-red-500 text-sm">
+                                Método de Pago es requerido.
+                            </div>
+                        </div>
+                        <div>
+                            <label
+                                for="card-number"
+                                class="block text-sm font-medium"
+                                >Número de Tarjeta:</label
+                            >
+                            <input
+                                type="text"
+                                id="card-number"
+                                formControlName="cardNumber"
+                                class="w-full p-2 border rounded" />
+                            <div
+                                *ngIf="
+                                    checkoutForm.get('cardNumber')?.invalid &&
+                                    checkoutForm.get('cardNumber')?.touched
+                                "
+                                class="text-red-500 text-sm">
+                                Número de Tarjeta es requerido.
+                            </div>
+                        </div>
+                        <div>
+                            <label
+                                for="expiry-date"
+                                class="block text-sm font-medium"
+                                >Fecha de Expiración:</label
+                            >
+                            <input
+                                type="text"
+                                id="expiry-date"
+                                formControlName="expiryDate"
+                                class="w-full p-2 border rounded" />
+                            <div
+                                *ngIf="
+                                    checkoutForm.get('expiryDate')?.invalid &&
+                                    checkoutForm.get('expiryDate')?.touched
+                                "
+                                class="text-red-500 text-sm">
+                                Fecha de Expiración es requerida.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <h3 class="font-semibold text-lg mb-2">
+                        Revisar artículos y envió
+                    </h3>
+                    <div class="flex flex-col gap-4">
+                        <div
+                            *ngFor="let item of cartItems"
+                            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <img
+                                [src]="'/producto.webp'"
+                                alt=""
+                                class="aspect-square w-full col-span-1" />
+                            <div class="md:col-span-2 flex flex-col gap-4">
+                                <h3
+                                    class="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                                    {{ item.product.nombre }}
+                                </h3>
+                                <p>{{ item.product.descripcion }}</p>
+                                <p>Cantidad: {{ item.quantity }}</p>
+                                <p>
+                                    Precio:
+                                    {{ item.product.precio | currencySoles }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="col-span-1 md:col-start-2 md:row-start-1 md:row-end-3 p-4 shadow-md rounded">
+                <!-- Content for the second box -->
+                <h3 class="font-semibold text-lg mb-2">Detalles de compra</h3>
+                <ul class="space-y-2">
+                    <li class="flex justify-between">
+                        <span>Costo del Producto:</span>
+                        <span>{{ productCost | currencySoles }}</span>
+                    </li>
+                    <li class="flex justify-between">
+                        <span>Costo del envió:</span>
+                        <span>{{ shippingCost | currencySoles }}</span>
+                    </li>
+                    <li class="flex justify-between">
+                        <span>Descuentos:</span>
+                        <span>{{ discount | currencySoles }}</span>
+                    </li>
+                    <li class="flex justify-between">
+                        <span>Total Antes de impuestos:</span>
+                        <span>{{ totalBeforeTax | currencySoles }}</span>
+                    </li>
+                    <li class="flex justify-between">
+                        <span>Calculo de impuestos:</span>
+                        <span>{{ totalTax | currencySoles }}</span>
+                    </li>
+                    <li class="flex justify-between font-bold text-lg">
+                        <span>Total:</span>
+                        <span>{{ total | currencySoles }}</span>
+                    </li>
+                </ul>
+                <div class="mt-4 flex items-center">
+                    <div class="relative">
+                        <p-inputSwitch
+                            formControlName="termsAccepted"
+                            class="mr-2"
+                            inputId="terms "></p-inputSwitch>
+                    </div>
+                    <label for="terms" class="text-sm">
+                        He leído y acepto los términos y condiciones
+                    </label>
+                    <div
+                        *ngIf="
+                            checkoutForm.get('termsAccepted')?.invalid &&
+                            checkoutForm.get('termsAccepted')?.touched
+                        "
+                        class="text-red-500 text-sm">
+                        Aceptar los términos y condiciones es requerido.
+                    </div>
+                </div>
+                <button
+                    class="w-full p-2 mt-4 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    type="submit"
+                    label="Finalizar Compra"
+                    pButton
+                    [disabled]="checkoutForm.invalid"
+                    (click)="onSubmit()"></button>
+            </div>
+        </div>
+    </form>
+</div>
