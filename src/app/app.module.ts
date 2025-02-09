@@ -1,12 +1,18 @@
-import { provideHttpClient, withFetch } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
-    imports: [BrowserModule, AppComponent],
-    providers: [provideHttpClient(withFetch()), CookieService, MessageService],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        ToastModule,
+        AppComponent,
+    ],
+    providers: [CookieService, MessageService],
 })
-export class AppModule {}
+export class AppModule { }

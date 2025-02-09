@@ -7,6 +7,7 @@ import { ProductsComponent } from './pages/products/products.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { OrdersComponent } from './pages/orders/orders.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -20,5 +21,6 @@ export const routes: Routes = [
     },
     { path: 'carrito-compras', component: CartComponent },
     { path: 'finalizar-compra', component: CheckoutComponent },
+    { path: 'ordenes', component: OrdersComponent },
     { path: '**', redirectTo: '' },
 ];

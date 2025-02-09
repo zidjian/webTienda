@@ -1,7 +1,11 @@
 <div class="max-w-7xl mx-auto my-16 p-4">
     <div class="grid grid-cols-8 gap-8">
         <img
-            [src]="product?.imagen || '/producto.webp'"
+            [src]="
+                product?.imagen
+                    ? 'data:image/jpeg;base64,' + product?.imagen
+                    : '/producto.webp'
+            "
             alt="{{ product?.nombre || '' }}"
             class="product-image col-span-3 rounded-lg shadow-md" />
         <div class="col-span-3 space-y-4">

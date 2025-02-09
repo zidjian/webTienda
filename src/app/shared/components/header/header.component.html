@@ -7,10 +7,13 @@
         <span>NanoTech</span>
     </a>
     <input
+        #searchInput
         pInputText
         type="text"
         class="w-48 mx-4 p-2 mt-2 sm:mt-0 border rounded"
-        placeholder="Buscar..." />
+        placeholder="Buscar..."
+        [(ngModel)]="searchQuery"
+        (input)="onSearchInput($event)" />
     <div class="flex items-center mt-2 sm:mt-0">
         <div
             class="mr-4 flex items-center cursor-pointer"
@@ -33,6 +36,11 @@
                         class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
                         [routerLink]="['/perfil']"
                         >Mi Perfil</a
+                    >
+                    <a
+                        class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                        [routerLink]="['/ordenes']"
+                        >Mis ordenes</a
                     >
                     <a
                         class="block px-4 py-2 text-gray-800 hover:bg-gray-200"

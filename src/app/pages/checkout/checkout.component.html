@@ -1,5 +1,6 @@
 <div class="max-w-7xl mx-auto my-12">
-    <h2 class="font-black text-4xl pb-8 text-center w-full">
+    <h2
+        class="font-black text-4xl pb-8 text-center w-full text-gray-900 dark:text-gray-100">
         Finalizar compra
     </h2>
     <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
@@ -7,22 +8,23 @@
             <div
                 class="grid col-span-1 md:grid-cols-subgrid gap-6 p-4 shadow-md rounded">
                 <!-- Content for the first box -->
-                <div class="">
-                    <h3 class="font-semibold text-lg mb-2">
-                        Dirección de envio
+                <div>
+                    <h3
+                        class="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">
+                        Dirección de envío
                     </h3>
                     <div class="space-y-4">
                         <div>
                             <label
                                 for="address"
-                                class="block text-sm font-medium"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300"
                                 >Dirección:</label
                             >
                             <input
                                 type="text"
                                 id="address"
                                 formControlName="address"
-                                class="w-full p-2 border rounded" />
+                                class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
                             <div
                                 *ngIf="
                                     checkoutForm.get('address')?.invalid &&
@@ -34,14 +36,16 @@
                             </div>
                         </div>
                         <div>
-                            <label for="city" class="block text-sm font-medium"
+                            <label
+                                for="city"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300"
                                 >Ciudad:</label
                             >
                             <input
                                 type="text"
                                 id="city"
                                 formControlName="city"
-                                class="w-full p-2 border rounded" />
+                                class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
                             <div
                                 *ngIf="
                                     checkoutForm.get('city')?.invalid &&
@@ -54,14 +58,14 @@
                         <div>
                             <label
                                 for="postal-code"
-                                class="block text-sm font-medium"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300"
                                 >Código Postal:</label
                             >
                             <input
                                 type="text"
                                 id="postal-code"
                                 formControlName="postalCode"
-                                class="w-full p-2 border rounded" />
+                                class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
                             <div
                                 *ngIf="
                                     checkoutForm.get('postalCode')?.invalid &&
@@ -73,50 +77,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="">
-                    <h3 class="font-semibold text-lg mb-2">
-                        Seleccionar metodo de pago
+                <div>
+                    <h3
+                        class="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">
+                        Seleccionar método de pago
                     </h3>
                     <div class="space-y-4">
                         <div>
                             <label
-                                for="payment-method"
-                                class="block text-sm font-medium"
-                                >Método de Pago:</label
-                            >
-                            <select
-                                id="payment-method"
-                                formControlName="paymentMethod"
-                                class="w-full p-2 border rounded">
-                                <option value="credit-card">
-                                    Tarjeta de Crédito
-                                </option>
-                                <option value="paypal">PayPal</option>
-                                <option value="bank-transfer">
-                                    Transferencia Bancaria
-                                </option>
-                            </select>
-                            <div
-                                *ngIf="
-                                    checkoutForm.get('paymentMethod')
-                                        ?.invalid &&
-                                    checkoutForm.get('paymentMethod')?.touched
-                                "
-                                class="text-red-500 text-sm">
-                                Método de Pago es requerido.
-                            </div>
-                        </div>
-                        <div>
-                            <label
                                 for="card-number"
-                                class="block text-sm font-medium"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300"
                                 >Número de Tarjeta:</label
                             >
                             <input
                                 type="text"
                                 id="card-number"
                                 formControlName="cardNumber"
-                                class="w-full p-2 border rounded" />
+                                class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
                             <div
                                 *ngIf="
                                     checkoutForm.get('cardNumber')?.invalid &&
@@ -129,14 +106,14 @@
                         <div>
                             <label
                                 for="expiry-date"
-                                class="block text-sm font-medium"
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300"
                                 >Fecha de Expiración:</label
                             >
                             <input
                                 type="text"
                                 id="expiry-date"
                                 formControlName="expiryDate"
-                                class="w-full p-2 border rounded" />
+                                class="w-full p-2 border rounded bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
                             <div
                                 *ngIf="
                                     checkoutForm.get('expiryDate')?.invalid &&
@@ -148,16 +125,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="">
-                    <h3 class="font-semibold text-lg mb-2">
-                        Revisar artículos y envió
+                <div>
+                    <h3
+                        class="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">
+                        Revisar artículos y envío
                     </h3>
                     <div class="flex flex-col gap-4">
                         <div
                             *ngFor="let item of cartItems"
                             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             <img
-                                [src]="'/producto.webp'"
+                                [src]="
+                                    item?.product?.imagen
+                                        ? 'data:image/jpeg;base64,' +
+                                          item?.product?.imagen
+                                        : '/producto.webp'
+                                "
                                 alt=""
                                 class="aspect-square w-full col-span-1" />
                             <div class="md:col-span-2 flex flex-col gap-4">
@@ -165,9 +148,13 @@
                                     class="text-3xl font-bold text-gray-900 dark:text-gray-100">
                                     {{ item.product.nombre }}
                                 </h3>
-                                <p>{{ item.product.descripcion }}</p>
-                                <p>Cantidad: {{ item.quantity }}</p>
-                                <p>
+                                <p class="text-gray-700 dark:text-gray-300">
+                                    {{ item.product.descripcion }}
+                                </p>
+                                <p class="text-gray-700 dark:text-gray-300">
+                                    Cantidad: {{ item.quantity }}
+                                </p>
+                                <p class="text-gray-700 dark:text-gray-300">
                                     Precio:
                                     {{ item.product.precio | currencySoles }}
                                 </p>
@@ -179,43 +166,53 @@
             <div
                 class="col-span-1 md:col-start-2 md:row-start-1 md:row-end-3 p-4 shadow-md rounded">
                 <!-- Content for the second box -->
-                <h3 class="font-semibold text-lg mb-2">Detalles de compra</h3>
+                <h3
+                    class="font-semibold text-lg mb-2 text-gray-900 dark:text-gray-100">
+                    Detalles de compra
+                </h3>
                 <ul class="space-y-2">
-                    <li class="flex justify-between">
+                    <li
+                        class="flex justify-between text-gray-700 dark:text-gray-300">
                         <span>Costo del Producto:</span>
                         <span>{{ productCost | currencySoles }}</span>
                     </li>
-                    <li class="flex justify-between">
-                        <span>Costo del envió:</span>
+                    <li
+                        class="flex justify-between text-gray-700 dark:text-gray-300">
+                        <span>Costo del envío:</span>
                         <span>{{ shippingCost | currencySoles }}</span>
                     </li>
-                    <li class="flex justify-between">
+                    <li
+                        class="flex justify-between text-gray-700 dark:text-gray-300">
                         <span>Descuentos:</span>
                         <span>{{ discount | currencySoles }}</span>
                     </li>
-                    <li class="flex justify-between">
+                    <li
+                        class="flex justify-between text-gray-700 dark:text-gray-300">
                         <span>Total Antes de impuestos:</span>
                         <span>{{ totalBeforeTax | currencySoles }}</span>
                     </li>
-                    <li class="flex justify-between">
-                        <span>Calculo de impuestos:</span>
+                    <li
+                        class="flex justify-between text-gray-700 dark:text-gray-300">
+                        <span>Cálculo de impuestos:</span>
                         <span>{{ totalTax | currencySoles }}</span>
                     </li>
-                    <li class="flex justify-between font-bold text-lg">
+                    <li
+                        class="flex justify-between font-bold text-lg text-gray-900 dark:text-gray-100">
                         <span>Total:</span>
                         <span>{{ total | currencySoles }}</span>
                     </li>
                 </ul>
-                <div class="mt-4 flex items-center">
-                    <div class="relative">
-                        <p-inputSwitch
+                <div class="mt-4 flex flex-col justify-center">
+                    <div class="flex items-center gap-4">
+                        <p-toggleswitch
                             formControlName="termsAccepted"
-                            class="mr-2"
-                            inputId="terms "></p-inputSwitch>
+                            [(ngModel)]="termsAccepted" />
+                        <label
+                            for="termsAccepted"
+                            class="text-sm text-gray-700 dark:text-gray-300">
+                            He leído y acepto los términos y condiciones
+                        </label>
                     </div>
-                    <label for="terms" class="text-sm">
-                        He leído y acepto los términos y condiciones
-                    </label>
                     <div
                         *ngIf="
                             checkoutForm.get('termsAccepted')?.invalid &&
@@ -231,7 +228,9 @@
                     label="Finalizar Compra"
                     pButton
                     [disabled]="checkoutForm.invalid"
-                    (click)="onSubmit()"></button>
+                    (click)="onSubmit()">
+                    Finalizar Compra
+                </button>
             </div>
         </div>
     </form>

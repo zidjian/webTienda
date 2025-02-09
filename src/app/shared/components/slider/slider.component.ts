@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CurrencySolesPipe } from '../../pipes/currency-soles.pipe';
 import { ButtonModule } from 'primeng/button';
+import { Product } from '../../../core/models/product.model';
 
 @Component({
     selector: 'app-slider',
@@ -18,15 +19,9 @@ import { ButtonModule } from 'primeng/button';
 })
 export class SliderComponent {
     @Input() images: string[] = [];
-    @Input() products: {
-        id: number;
-        title: string;
-        description: string;
-        price: number;
-        image: string;
-    }[] = [];
+    @Input() products: Product[] = [];
 
-    constructor(private router: Router) {}
+    constructor(private router: Router) { }
 
     redirectToProduct(id: number) {
         this.router.navigate(['/producto', id]);

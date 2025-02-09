@@ -10,5 +10,4 @@ export interface Product {
     categoria_id: number;
     fecha_creacion: string;
     fecha_actualizacion: string;
-    // ...other properties...
 }

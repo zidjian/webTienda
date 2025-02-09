@@ -6,33 +6,46 @@ import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import { Product } from '../../core/models/product.model';
 import { FormsModule, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { InputSwitchModule } from 'primeng/inputswitch';
+import { ToggleSwitchModule } from 'primeng/toggleswitch';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environment';
+import { AuthService } from '../../core/services/auth.service';
+import { DialogModule } from 'primeng/dialog';
+import confetti from 'canvas-confetti';
+import { MessageService } from 'primeng/api';
 
 @Component({
-    selector: 'app-checkout', // Corrected selector name
+    selector: 'app-checkout',
     templateUrl: './checkout.component.html',
-    imports: [CommonModule, ButtonModule, RouterModule, CurrencySolesPipe, InputSwitchModule, FormsModule, ReactiveFormsModule],
+    imports: [CommonModule, ButtonModule, RouterModule, CurrencySolesPipe, ToggleSwitchModule, FormsModule, ReactiveFormsModule, DialogModule],
+    providers: [CurrencySolesPipe]
 })
 export class CheckoutComponent implements OnInit {
     cartItems: { product: Product; quantity: number; }[] = [];
     productCost: number = 0;
-    shippingCost: number = 10; // Example shipping cost
+    shippingCost: number = 0;
     discount: number = 0;
-    tax: number = 0.18; // Example tax rate
+    tax: number = 0.18;
     totalBeforeTax: number = 0;
     totalTax: number = 0;
     total: number = 0;
     termsAccepted: boolean = false;
+    displayModal: boolean = false;
 
     checkoutForm!: FormGroup;
 
-    constructor(private cartService: CartService, private fb: FormBuilder, private router: Router) { }
+    constructor(
+        private authService: AuthService, private http: HttpClient, private cartService: CartService, private fb: FormBuilder, private router: Router, private messageService: MessageService) { }
 
     ngOnInit() {
         this.initializeForm(); // Moved form initialization here
         this.cartService.getCartItems().subscribe(items => {
             this.cartItems = items;
-            this.calculateTotals();
+            if (this.cartItems.length === 0) {
+                this.router.navigate(['/productos']); // Redirect to products page if cart is empty
+            } else {
+                this.calculateTotals();
+            }
         });
     }
 
@@ -41,7 +54,6 @@ export class CheckoutComponent implements OnInit {
             address: ['', Validators.required],
             city: ['', Validators.required],
             postalCode: ['', Validators.required],
-            paymentMethod: ['', Validators.required],
             cardNumber: ['', Validators.required],
             expiryDate: ['', Validators.required],
             termsAccepted: [false, Validators.requiredTrue]
@@ -56,32 +68,44 @@ export class CheckoutComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log('Form submitted'); // Add this line to check if the method is called
         if (this.checkoutForm.valid) {
-            const { address, city, postalCode, paymentMethod, cardNumber, expiryDate, termsAccepted } = this.checkoutForm.value;
-            if (termsAccepted) {
-                const orderDetails = {
-                    address,
-                    city,
-                    postalCode,
-                    paymentMethod,
-                    cardNumber,
-                    expiryDate,
-                    cartItems: this.cartItems,
-                    productCost: this.productCost,
-                    shippingCost: this.shippingCost,
-                    discount: this.discount,
-                    totalBeforeTax: this.totalBeforeTax,
-                    totalTax: this.totalTax,
-                    total: this.total
-                };
-                console.log('Detalles de la orden:', orderDetails);
-            } else {
-                console.log('Por favor, acepte los términos y condiciones.');
-            }
+            const { termsAccepted } = this.checkoutForm.value;
+            const postData = {
+                cliente_id: this.authService.getUser().id, // Example client ID
+                productos: this.cartItems.map(item => ({
+                    id: item.product.id,
+                    cantidad: item.quantity
+                }))
+            };
+
+            const headers = this.authService.sendToken();
+
+            this.http.post(`${environment.API_URL}ordenes`, postData, { headers }).subscribe({
+                next: response => {
+                    this.cartService.clearCart(); // Clear the cart after order submission
+                    this.showConfetti(); // Show confetti
+                    this.showToast('success', 'Orden Exitosa', '¡Tu orden ha sido realizada con éxito!');
+                    this.router.navigate(['/ordenes']); // Redirect to orders page
+                },
+                error: error => {
+                    console.error('Error submitting order', error);
+                    this.showToast('error', 'Error', 'Hubo un problema al realizar tu orden.');
+                }
+            });
         } else {
             this.checkoutForm.markAllAsTouched();
-            console.log('Por favor, complete todos los campos requeridos.');
         }
+    }
+
+    showToast(severity: string, summary: string, detail: string) {
+        this.messageService.add({ severity, summary, detail });
+    }
+
+    showConfetti() {
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 }
+        });
     }
 }

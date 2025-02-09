@@ -26,16 +26,16 @@ export class ProductDetailComponent implements OnInit {
     getProductDetails(): void {
         const productId = this.route.snapshot.paramMap.get('id');
         if (productId) {
-            this.http.get<Product>(`${environment.API_URL}productos/${productId}`).subscribe(
-                (data: Product) => {
+            this.http.get<Product>(`${environment.API_URL}productos/${productId}`).subscribe({
+                next: (data: Product) => {
                     this.product = data;
                     this.updateTotalPrice();
                 },
-                (error) => {
+                error: (error) => {
                     console.error('Error fetching product details:', error);
                     this.router.navigate(['/']);
                 }
-            );
+            });
         }
     }
 
@@ -67,7 +67,9 @@ export class ProductDetailComponent implements OnInit {
     }
 
     buyNow(): void {
-        // Lógica para comprar ahora
-        console.log(`Comprando ${this.quantity} de ${this.product?.nombre}`);
+        if (this.product) {
+            this.cartService.addProductToCart(this.product, this.quantity);
+            this.router.navigate(['/finalizar-compra']);
+        }
     }
 }

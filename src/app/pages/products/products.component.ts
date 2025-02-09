@@ -1,32 +1,37 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ProductCardComponent } from '../../shared/components/product-card/product-card.component';
+import { Product } from '../../core/models/product.model';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environment';
+import { ProductListComponent } from '../../shared/components/product-list/product-list.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-products',
     templateUrl: './products.component.html',
-    imports: [CommonModule, ProductCardComponent],
+    imports: [CommonModule, ProductListComponent],
 })
 export class ProductsComponent implements OnInit {
-    products = [
-        // Example products
-        {
-            id: 1,
-            name: 'Product 1',
-            price: 100,
-            rating: 4.5,
-            image: 'path/to/image1.jpg',
-        },
-        {
-            id: 2,
-            name: 'Product 2',
-            price: 200,
-            rating: 4.0,
-            image: 'path/to/image2.jpg',
-        },
-    ];
+    products: Product[] = [];
 
-    constructor() {}
+    constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.route.queryParamMap.subscribe(() => {
+            this.getProducts();
+        });
+    }
+
+    getProducts(): void {
+        const queryParam = this.route.snapshot.queryParamMap.get('name') || 'laptop';
+        this.http.get<Product[]>(`${environment.API_URL}productos?query=${queryParam}`).subscribe({
+            next: (data: Product[]) => {
+                this.products = data;
+            },
+            error: (error) => {
+                console.error('Error fetching products:', error);
+            }
+        });
+    }
 }

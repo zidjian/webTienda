@@ -4,6 +4,7 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { RouterModule } from '@angular/router';
 import { CurrencySolesPipe } from '../../pipes/currency-soles.pipe';
+import { Product } from '../../../core/models/product.model';
 
 @Component({
     selector: 'app-product-card',
@@ -17,11 +18,5 @@ import { CurrencySolesPipe } from '../../pipes/currency-soles.pipe';
     ],
 })
 export class ProductCardComponent {
-    @Input() product!: {
-        id: string;
-        image: string;
-        name: string;
-        price: number;
-        rating: number;
-    };
+    @Input() product?: Product;
 }

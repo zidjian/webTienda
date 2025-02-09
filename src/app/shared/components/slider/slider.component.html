@@ -9,19 +9,23 @@
             <div
                 class="items-center grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                 <img
-                    [src]="product.image"
+                    [src]="
+                        product?.imagen
+                            ? 'data:image/jpeg;base64,' + product?.imagen
+                            : '/producto.webp'
+                    "
                     class="w-full object-cover rounded-lg shadow-md mb-4 aspect-square" />
                 <div class="">
                     <h3
                         (click)="redirectToProduct(product.id)"
                         class="text-lg dark:text-white md:text-2xl font-bold cursor-pointer hover:underline mb-2">
-                        {{ product.title }}
+                        {{ product.nombre }}
                     </h3>
                     <p class="text-sm md:text-base">
-                        {{ product.description }}
+                        {{ product.descripcion }}
                     </p>
                     <p class="text-lg md:text-xl font-bold text-green-600 mb-4">
-                        {{ product.price | currencySoles }}
+                        {{ product.precio | currencySoles }}
                     </p>
                     <div class="w-full flex flex-row justify-between mt-4">
                         <button

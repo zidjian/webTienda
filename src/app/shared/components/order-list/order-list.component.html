@@ -1,0 +1,22 @@
+<div
+    *ngFor="let order of orders"
+    class="order border p-4 mb-4 rounded-lg shadow-lg">
+    <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-gray-100">
+        Order ID: {{ order.id }}
+    </h3>
+    <p class="text-gray-600 dark:text-gray-400 mb-4">
+        Date: {{ order.fecha_compra | date }}
+    </p>
+    <div *ngFor="let producto of order.productos" class="product mb-2">
+        <p class="text-gray-800 dark:text-gray-200">
+            {{ producto.nombre }} - {{ producto.precio | currency }} x
+            {{ producto.pivot.cantidad }}
+        </p>
+        <p class="text-gray-600 dark:text-gray-400">
+            Description: {{ producto.descripcion }}
+        </p>
+    </div>
+    <p class="text-lg font-bold text-gray-900 dark:text-gray-100">
+        Total: {{ order.importe_total | currency }}
+    </p>
+</div>

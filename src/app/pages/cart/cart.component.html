@@ -1,6 +1,8 @@
 <div class="max-w-7xl mx-auto my-12">
     <h2 class="font-black text-4xl pb-8">Cesta</h2>
-    <div class="border-y border-white py-8 flex flex-col gap-8">
+    <div
+        *ngIf="cartItems.length > 0; else emptyCart"
+        class="border-y border-white py-8 flex flex-col gap-8">
         <div
             *ngFor="let item of cartItems"
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -40,10 +42,33 @@
                         [disabled]="item.quantity >= (item.product.stock || 0)"
                         class="p-2 bg-gray-200 dark:bg-gray-700 rounded-full"></button>
                 </div>
+                <button
+                    pButton
+                    type="button"
+                    severity="danger"
+                    icon="pi pi-trash"
+                    (click)="removeFromCart(item.product.id)"
+                    class="p-2 rounded-full text-white"></button>
             </div>
         </div>
     </div>
-    <div class="mt-8 flex justify-end gap-4 items-center">
+    <ng-template #emptyCart>
+        <p class="text-2xl font-semibold text-gray-900 dark:text-gray-100">
+            No hay productos en el carrito de compras.
+        </p>
+        <div class="flex justify-end mt-8">
+            <button
+                pButton
+                type="button"
+                label="Seguir comprando"
+                [routerLink]="['/productos']"
+                routerLinkActive="router-link-active"
+                class="p-2 bg-gray-200 dark:bg-gray-700 rounded-full"></button>
+        </div>
+    </ng-template>
+    <div
+        *ngIf="cartItems.length > 0"
+        class="mt-8 flex justify-end gap-4 items-center">
         <p class="text-2xl font-semibold text-gray-900 dark:text-gray-100">
             Total
         </p>
@@ -51,7 +76,7 @@
             {{ total | currencySoles }}
         </p>
     </div>
-    <div class="flex justify-end mt-8">
+    <div *ngIf="cartItems.length > 0" class="flex justify-end mt-8">
         <button
             pButton
             type="button"

@@ -75,7 +75,6 @@ export class RegisterComponent {
             const apiUrl = `${environment.API_URL}registro`;
             this.http.post(apiUrl, this.registerForm.value).subscribe({
                 next: response => {
-                    console.log('Registration successful', response);
                     this.router.navigate(['/iniciar-sesion']);
                 },
                 error: error => {

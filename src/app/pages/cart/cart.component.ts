@@ -40,6 +40,12 @@ export class CartComponent implements OnInit {
         }
     }
 
+    removeFromCart(productId: number): void {
+        this.cartService.removeProductFromCart(productId);
+        this.cartItems = this.cartItems.filter(item => item.product.id !== productId);
+        this.calculateTotal();
+    }
+
     calculateTotal(): void {
         this.total = this.cartItems.reduce((acc, item) => acc + item.product.precio * item.quantity, 0);
     }

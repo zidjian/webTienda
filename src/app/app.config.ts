@@ -10,6 +10,8 @@ import {
 } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { ToastModule } from 'primeng/toast';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -23,5 +25,7 @@ export const appConfig: ApplicationConfig = {
         }),
         provideHttpClient(),
         MessageService,
+        provideAnimations(),
+        ToastModule
     ],
 };

@@ -1,1 +1,6 @@
 @import 'tailwindcss';
+
+.p-toggleswitch-slider:before {
+    top: 50%;
+    translate: -50%;
+}

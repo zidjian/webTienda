@@ -25,6 +25,12 @@ export class CartService {
         this.cartItemsSubject.next(cart);
     }
 
+    removeProductFromCart(productId: number): void {
+        const cart = this.getCart().filter(item => item.product.id !== productId);
+        this.saveCart(cart);
+        this.cartItemsSubject.next(cart);
+    }
+
     getCart(): { product: Product, quantity: number }[] {
         if (typeof window !== 'undefined') {
             const cart = localStorage.getItem(this.storageKey);
@@ -40,10 +46,8 @@ export class CartService {
     }
 
     clearCart(): void {
-        if (typeof window !== 'undefined') {
-            localStorage.removeItem(this.storageKey);
-            this.cartItemsSubject.next([]);
-        }
+        localStorage.removeItem(this.storageKey);
+        this.cartItemsSubject.next([]);
     }
 
     getCartItems() {

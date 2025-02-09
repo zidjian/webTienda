@@ -69,10 +69,15 @@ export class AuthService {
         }
     }
 
-    private getToken(): string | null {
+    getToken(): string | null {
         return this.cookieService
             ? this.cookieService.get(this.tokenKey) || null
             : null;
+    }
+
+    sendToken(): { Authorization: string } {
+        const token = this.getToken();
+        return { Authorization: token ? `Bearer ${token}` : '' };
     }
 
     private clearToken(): void {
