@@ -16,9 +16,9 @@
 
 ## Descripción del proyecto
 
-Ecommerce de productos electronicos.
+Ecommerce de productos electronicos. Proyecto desarrolado para el Curso de Ingenieria de Software.
 
-![Mockup del proyecto](ubicación)
+![Mockup del proyecto](./public/mockup.png)
 
 ## Desplegar el proyecto
 
@@ -29,11 +29,13 @@ Ecommerce de productos electronicos.
 
 ## Funcionalidades del proyecto
 
--
+- Login y registro de usuarios
+- Carrito de compras
 
 ## Acceso al proyecto
 
-[Demo](enlace)
+- [Demo](enlace)
+- [API](https://nanotechstore.store/backend/public/api)
 
 ## Tecnologías utilizadas
 
