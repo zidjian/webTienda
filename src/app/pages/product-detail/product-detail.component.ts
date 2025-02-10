@@ -73,3 +73,11 @@ export class ProductDetailComponent implements OnInit {
         }
     }
 }
+
+export function getPrerenderParams() {
+    return [
+        { id: "1" },
+        { id: "2" },
+        { id: "3" },
+    ]; // Lista de productos a prerenderizar
+}

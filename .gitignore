@@ -43,3 +43,6 @@ Thumbs.db
 
 .angular
 /.vscode
+
+# Don't include the environment file in the build
+environment.ts
